@@ -22,3 +22,22 @@ app.register_blueprint(authors_app, url_prefix="/authors")
 cfg_name = os.environ.get("CONFIG_NAME") or "ProductionConfig"
 app.config.from_object(f"blog.configs.{cfg_name}")
 migrate = Migrate(app, db)
+
+@app.cli.command("create-tags")
+def create_tags():
+    """
+    Run in your terminal:
+    ➜ flask create-tags
+    """
+    from blog.models import Tag
+    for name in [
+        "flask",
+        "django",
+        "python",
+        "sqlalchemy",
+        "news",
+    ]:
+        tag = Tag(name=name)
+        db.session.add(tag)
+    db.session.commit()
+    print("created tags")
