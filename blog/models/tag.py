@@ -11,3 +11,7 @@ class Tag(db.Model):
         secondary=article_tag_association_table,
         back_populates="tags",
     )
+
+
+def __str__(self):
+    return self.name
