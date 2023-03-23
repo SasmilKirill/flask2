@@ -4,7 +4,7 @@ from blog.models.database import db
 from flask_migrate import Migrate
 from blog.views.authors import authors_app
 from blog.admin import admin
-
+from blog.api import init_api
 
 def create_app() -> Flask:
     app = Flask(__name__)
@@ -45,3 +45,4 @@ def create_tags():
     print("created tags")
 
 admin.init_app(app)
+api = init_api(app)
